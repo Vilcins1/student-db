@@ -18,7 +18,7 @@ int main(){
 	struct student *data;
 	int err = 0;
 
-	printf("Do you want to see existing student data?\n");
+	printf("Do you want to see existing student data?(1/0)\n");
 	scanf("%d", &yn);
 	if( yn == 1){
 		data = dataRead(file, &c);
@@ -29,6 +29,7 @@ int main(){
 			printf("There are %d students in databas: \n", c);
 			dataOutput(c, data);
 		}
+		return 0;
 	}
 
 	printf("Please enter number of students: ");
