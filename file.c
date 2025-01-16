@@ -51,21 +51,24 @@ struct student *dataRead(const char *file, int *count){
 	
 	data = (struct student *)malloc(sizeof(struct student));
 	if(!data){
-		return data;
+		goto exit;
 	}
 	
 	while(1){
 		br = read(fd, data + *count, sizeof(struct student));
+		printf("read %lu bytes\n", br);
 		if(br < sizeof(struct student)){
 			break;
 		}
-		*count++;
+		(*count)++;
+		printf("count is %d\n", *count);
 		data = (struct student *)realloc(data, sizeof(struct student)* (*count+1));
 		if (!data){
 			break;
 		}
 	}
-	
+exit:
+	close(fd);
 	return data;
 }
 
