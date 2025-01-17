@@ -21,9 +21,11 @@ void dataInput(int count, struct student *s) {
 void dataOutput( int count, struct student *s){
 	if (count < 1){
 		printf("No data to show\n");
+		goto exit;
 	}
 	if (count > MAX_STUDENTS) {
 		printf("Too much data to show\n");
+		goto exit;
 	}
 	printf("User entered data:\n");
 	for ( int i = 0; i < count; i++){

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #include "common.h"
 
@@ -44,8 +45,9 @@ struct student *dataRead(const char *file, int *count){
 		return data;
 	}
 		
-	fd = open(file, O_RDONLY);
+	fd = open(file, O_RDWR, 0600);
 	if( fd < 0){
+		printf("Error opening file is %d ($m)\n", fd);
 		return data;
 	}
 	
@@ -57,13 +59,14 @@ struct student *dataRead(const char *file, int *count){
 	while(1){
 		br = read(fd, data + *count, sizeof(struct student));
 		printf("read %lu bytes\n", br);
-		if(br < sizeof(struct student)){
+		if(br != sizeof(struct student)){
 			break;
 		}
 		(*count)++;
 		printf("count is %d\n", *count);
 		data = (struct student *)realloc(data, sizeof(struct student)* (*count+1));
 		if (!data){
+			printf("Realloc failed\n");
 			break;
 		}
 	}
