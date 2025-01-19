@@ -5,6 +5,7 @@
 
 void dataInput(int count, struct student *s) {
 	if(count<1)
+		printf("Nothing to show\n");
 		return;
 	if(count > MAX_STUDENTS){
 		printf("Too much data for input\n");
